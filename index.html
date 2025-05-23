@@ -20,12 +20,47 @@
         margin: 0;
         color: #00004D;
     }
+    h1{
+        color: #00004D;
+    }
+    .sidebar{
+      list-style-type: none; /* remove bullets */
+      padding: 10px;          /* remove padding */
+      margin-top: 100px;           /* remove margin */
+      position: absolute;   /* position it absolutely */
+      top: 40px;           /* distance from the top */
+      left: 20px;
+      color: #00004D;          /* distance from the left */
+    }
+    li {
+      margin: 10px 0;        /* space between items */
+      font-size: 20px;       /* font size */
+      color: #00004D;        /* text color */
+    }
+    img {
+      width: 100px;          /* image width */
+      height: auto;         /* maintain aspect ratio */
+      border-radius: 50%;   /* circular image */
+      margin-top: 20px;     /* space above the image */
+      position: absolute; /* position it absolutely */
+        top: 20px;           /* distance from the top */
+        right: 20px;          /* distance from the left */
+    }
   </style>
 </head>
 <body>
   <div class="outer-border">
     <h1>Michael D. Eñoza</h1>
-    <p>Hello world</p>
+    <div>
+        <img src="img/CCT_17065.JPG">
+    </div>
+    <div class="sidebar">
+        <li>home</li>
+        <li>information</li>
+        <li>projects</li>
+        <li>contact</li>
+        <li>about</li>
+    </div>
   </div>
 </body>
 </html>
