@@ -1,105 +1,203 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Home page</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>John Doe | Backend Developer</title>
   <style>
-    body {
+    :root {
+      --primary-color: #111;
+      --secondary-color: #444;
+      --accent-color: #007bff;
+      --bg-color: #f9f9f9;
+    }
+    * {
       margin: 0;
-      font-family: Arial, sans-serif;
-      background-color: #f0f0f0;
-    }
-    .outer-border {
-      display: flex;
-      flex-direction: row;
-      min-height: 100vh;
-      border: 2px solid #000080;
-      background: linear-gradient(to right, #ffffff, #d1e0ff);
-    }
-    .sidebar {
-      width: 20%;
-      background-color: #00004D;
-      color: white;
-      padding: 20px;
-      box-sizing: border-box;
-    }
-    .sidebar h3 {
-      margin: 0 0 20px 0;
-      font-size: 24px;
-      text-align: start;
-      color: #ffffff;
-      border-bottom: 1px solid #ffffff;
-      padding-bottom: 10px;
-    }
-    .sidebar ul {
-      list-style-type: none;
       padding: 0;
-      margin: 0;
+      box-sizing: border-box;
     }
-    .sidebar li {
-      margin: 15px 0;
-      font-size: 18px;
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: var(--bg-color);
+      color: var(--primary-color);
+      line-height: 1.6;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    header {
+      padding: 40px 20px 20px;
+      text-align: center;
+      background-color: white;
+      border-bottom: 1px solid #eaeaea;
+    }
+    header h1 {
+      font-size: 2.5rem;
+      margin-bottom: 10px;
+    }
+    header p {
+      font-size: 1.1rem;
+      color: var(--secondary-color);
+    }
+    nav {
+      margin-top: 15px;
+    }
+    nav button {
+      background: none;
+      border: none;
+      margin: 0 12px;
+      font-weight: 600;
+      font-size: 1rem;
+      color: var(--primary-color);
       cursor: pointer;
-      padding: 10px;
-      border-radius: 5px;
-      transition: background-color 0.3s, color 0.3s;
+      padding: 8px 12px;
+      border-radius: 4px;
+      transition: background-color 0.3s ease;
     }
-    .sidebar li:hover {
-      background-color: #1111c5;
+    nav button:hover,
+    nav button.active {
+      background-color: var(--accent-color);
       color: white;
     }
-    .content {
+    main {
       flex-grow: 1;
+      max-width: 700px;
+      margin: 40px auto;
+      padding: 0 20px;
+      background: white;
+      border-radius: 8px;
+      box-shadow: 0 2px 6px rgb(0 0 0 / 0.1);
+      min-height: 300px;
+    }
+    section {
+      display: none;
+    }
+    section.active {
+      display: block;
+    }
+    section h2 {
+      font-size: 1.8rem;
+      margin-bottom: 15px;
+      border-bottom: 1px solid #ddd;
+      padding-bottom: 5px;
+    }
+    .project {
+      margin-bottom: 30px;
+    }
+    .project h3 {
+      font-size: 1.2rem;
+      color: var(--accent-color);
+      margin-bottom: 5px;
+    }
+    .project p {
+      color: var(--secondary-color);
+    }
+    ul {
+      padding-left: 20px;
+    }
+    ul li {
+      margin-bottom: 8px;
+    }
+    a {
+      color: var(--accent-color);
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+    footer {
+      text-align: center;
       padding: 20px;
-      box-sizing: border-box;
-      background-image: url('img/backend.jpg'); /* Default background image */
-      background-size: cover;
-      background-position: center;
-      background-repeat: no-repeat;
-      border-left: 2px solid #000080;
-      color: white; /* Adjust text color for better contrast */
+      font-size: 0.9rem;
+      background-color: white;
+      border-top: 1px solid #eaeaea;
+      color: var(--secondary-color);
+      margin-top: auto;
     }
-    .content h2 {
-      color: black; /* Adjust heading color for better visibility */
+    .head {
+      display: inline-flex;
+      align-items: center;
+      margin-bottom: 20px;
     }
-    .content p {
-      color: black; /* Adjust paragraph color for better visibility */
+    .head img {
+      margin-right: 20px;
     }
   </style>
 </head>
 <body>
-  <div class="outer-border">
-    <!-- Sidebar -->
-    <div class="sidebar" role="navigation" aria-label="Sidebar">
-      <h3>Michael Eñoza</h3>
-      <ul>
-        <li onclick="showContent('Information')">Information</li>
-        <li onclick="showContent('Projects')">Projects</li>
-        <li onclick="showContent('Contact')">Contact</li>
-        <li onclick="showContent('About')">About</li>
-      </ul>
-    </div>
 
-    <!-- Content Area -->
-    <div class="content" id="content" role="main">
-      <h2>Welcome</h2>
-      <p>Select a section from the sidebar to view its content.</p>
-    </div>
-  </div>
+<header>
+<div class="head">
+    <img src="img/CCT_17065.JPG" alt="Profile Picture" style="width: 80px; height: 80px; border-radius: 50%; object-fit: cover; margin-bottom: 10px;" />
+    <h1>Michael Eñoza</h1>
+</div>
+  
+  <p>Backend Developer | IT Graduate</p>
+  <nav>
+    <button class="tab-button active" data-target="about">About</button>
+    <button class="tab-button" data-target="skills">Skills</button>
+    <button class="tab-button" data-target="projects">Projects</button>
+    <button class="tab-button" data-target="contact">Contact</button>
+  </nav>
+</header>
 
-  <script>
-    function showContent(section) {
-      const contentDiv = document.getElementById('content');
-      // Change the content dynamically
-      contentDiv.innerHTML = `
-        <h2>${section}</h2>
-        <p>This is a placeholder for the ${section.toLowerCase()} section. Add your content here.</p>
-      `;
-      // Change the background to a gradient color that matches the palette
-      contentDiv.style.background = 'linear-gradient(to right, #ffffff, #d1e0ff, #00004D)';
-      contentDiv.style.backgroundSize = 'cover'; // Ensure the gradient covers the area
-    }
-  </script>
+<main>
+  <section id="about" class="active">
+    <h2>About</h2>
+    <p>I am a detail-oriented IT graduate with a passion for backend development. I enjoy solving complex problems and building efficient, scalable systems. I specialize in Java, Python, and PHP and am continuously expanding my knowledge in backend technologies and system design.</p>
+  </section>
+
+  <section id="skills">
+    <h2>Skills</h2>
+    <ul>
+      <li><strong>Languages:</strong> PHP, Python, JavaScript, Python, Java, Flutter, C#</li>
+      <li><strong>Databases:</strong> MySQL</li>
+      <li><strong>Tools:</strong> Github</li>
+      <li><strong>Systems:</strong>Windows</li>
+    </ul>
+  </section>
+
+  <section id="projects">
+    <h2>Projects</h2>
+    <div class="project">
+      <h3>2D Mapping and Management System for Tagaytay Memorial Park</h3>
+      <p>Built a 2D map for tagaytay memorial park using PHP, MySQL, and JavaScript that will locate the specific block where in the searched name of the deceased is located.This system was originally developed to lessen the manual searching from pen and paper and making it into digital adaptation. </p>
+    </div>
+  
+  </section>
+
+  <section id="contact">
+    <h2>Contact</h2>
+    <p>Email: <a href="mailto:enozamichael12@gmail.com">enozamichael12@gmail.com</a></p>
+    <p>Facebook: <a href="https://web.facebook.com/Keykil1121">Michael Eñoza</a></p>
+    <p>GitHub: <a href="https://github.com/michael24569" target="_blank" rel="noopener noreferrer">github.com/michael24569</a></p>
+  </section>
+</main>
+
+<footer>
+  <p>&copy; 2025 John Doe. All rights reserved.</p>
+</footer>
+
+<script>
+  const buttons = document.querySelectorAll('.tab-button');
+  const sections = document.querySelectorAll('main section');
+
+  buttons.forEach(button => {
+    button.addEventListener('click', () => {
+      // Remove active class from all buttons
+      buttons.forEach(btn => btn.classList.remove('active'));
+      // Add active class to clicked button
+      button.classList.add('active');
+
+      // Hide all sections
+      sections.forEach(section => section.classList.remove('active'));
+
+      // Show targeted section
+      const target = button.getAttribute('data-target');
+      document.getElementById(target).classList.add('active');
+    });
+  });
+</script>
+
 </body>
 </html>
