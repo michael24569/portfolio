@@ -2,65 +2,104 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Home page</title>
   <style>
     body {
       margin: 0;
-      background-color: #f0f0f0; /* optional background */
+      font-family: Arial, sans-serif;
+      background-color: #f0f0f0;
     }
     .outer-border {
-      margin: 10px;              /* 10px space on all sides */
-      border: 2px solid #000080;   /* outer border */
-      padding: 20px;             /* optional: space inside the border */
-      min-height: calc(100vh - 20px); /* full height minus top/bottom margin */
+      display: flex;
+      flex-direction: row;
+      min-height: 100vh;
+      border: 2px solid #000080;
+      background: linear-gradient(to right, #ffffff, #d1e0ff);
+    }
+    .sidebar {
+      width: 20%;
+      background-color: #00004D;
+      color: white;
+      padding: 20px;
       box-sizing: border-box;
-      background: linear-gradient(to right, #ffffff, #d1e0ff); /* gradient background */
     }
-    p{
-        margin: 0;
-        color: #00004D;
+    .sidebar h3 {
+      margin: 0 0 20px 0;
+      font-size: 24px;
+      text-align: start;
+      color: #ffffff;
+      border-bottom: 1px solid #ffffff;
+      padding-bottom: 10px;
     }
-    h1{
-        color: #00004D;
+    .sidebar ul {
+      list-style-type: none;
+      padding: 0;
+      margin: 0;
     }
-    .sidebar{
-      list-style-type: none; /* remove bullets */
-      padding: 10px;          /* remove padding */
-      margin-top: 100px;           /* remove margin */
-      position: absolute;   /* position it absolutely */
-      top: 40px;           /* distance from the top */
-      left: 20px;
-      color: #00004D;          /* distance from the left */
+    .sidebar li {
+      margin: 15px 0;
+      font-size: 18px;
+      cursor: pointer;
+      padding: 10px;
+      border-radius: 5px;
+      transition: background-color 0.3s, color 0.3s;
     }
-    li {
-      margin: 10px 0;        /* space between items */
-      font-size: 20px;       /* font size */
-      color: #00004D;        /* text color */
+    .sidebar li:hover {
+      background-color: #1111c5;
+      color: white;
     }
-    img {
-      width: 100px;          /* image width */
-      height: auto;         /* maintain aspect ratio */
-      border-radius: 50%;   /* circular image */
-      margin-top: 20px;     /* space above the image */
-      position: absolute; /* position it absolutely */
-        top: 20px;           /* distance from the top */
-        right: 20px;          /* distance from the left */
+    .content {
+      flex-grow: 1;
+      padding: 20px;
+      box-sizing: border-box;
+      background-image: url('img/backend.jpg'); /* Default background image */
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      border-left: 2px solid #000080;
+      color: white; /* Adjust text color for better contrast */
+    }
+    .content h2 {
+      color: black; /* Adjust heading color for better visibility */
+    }
+    .content p {
+      color: black; /* Adjust paragraph color for better visibility */
     }
   </style>
 </head>
 <body>
   <div class="outer-border">
-    <h1>Michael D. Eñoza</h1>
-    <div>
-        <img src="img/CCT_17065.JPG">
+    <!-- Sidebar -->
+    <div class="sidebar" role="navigation" aria-label="Sidebar">
+      <h3>Michael Eñoza</h3>
+      <ul>
+        <li onclick="showContent('Information')">Information</li>
+        <li onclick="showContent('Projects')">Projects</li>
+        <li onclick="showContent('Contact')">Contact</li>
+        <li onclick="showContent('About')">About</li>
+      </ul>
     </div>
-    <div class="sidebar">
-        <li>home</li>
-        <li>information</li>
-        <li>projects</li>
-        <li>contact</li>
-        <li>about</li>
+
+    <!-- Content Area -->
+    <div class="content" id="content" role="main">
+      <h2>Welcome</h2>
+      <p>Select a section from the sidebar to view its content.</p>
     </div>
   </div>
+
+  <script>
+    function showContent(section) {
+      const contentDiv = document.getElementById('content');
+      // Change the content dynamically
+      contentDiv.innerHTML = `
+        <h2>${section}</h2>
+        <p>This is a placeholder for the ${section.toLowerCase()} section. Add your content here.</p>
+      `;
+      // Change the background to a gradient color that matches the palette
+      contentDiv.style.background = 'linear-gradient(to right, #ffffff, #d1e0ff, #00004D)';
+      contentDiv.style.backgroundSize = 'cover'; // Ensure the gradient covers the area
+    }
+  </script>
 </body>
 </html>
