@@ -1,11 +1,31 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+  <meta charset="UTF-8">
+  <title>Home page</title>
+  <style>
+    body {
+      margin: 0;
+      background-color: #f0f0f0; /* optional background */
+    }
+    .outer-border {
+      margin: 10px;              /* 10px space on all sides */
+      border: 2px solid #000080;   /* outer border */
+      padding: 20px;             /* optional: space inside the border */
+      min-height: calc(100vh - 20px); /* full height minus top/bottom margin */
+      box-sizing: border-box;
+      background: linear-gradient(to right, #ffffff, #d1e0ff); /* gradient background */
+    }
+    p{
+        margin: 0;
+        color: #00004D;
+    }
+  </style>
 </head>
 <body>
-    <p>hello world</p>
+  <div class="outer-border">
+    <h1>Michael D. Eñoza</h1>
+    <p>michael</p>
+  </div>
 </body>
 </html>
