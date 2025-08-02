@@ -16,161 +16,348 @@
       padding: 0;
       box-sizing: border-box;
     }
+    
+    html {
+      scroll-behavior: smooth;
+    }
+    
     body {
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       background-color: var(--bg-color);
       color: var(--primary-color);
       line-height: 1.6;
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
     }
+    
     header {
-      padding: 40px 20px 20px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      padding: 20px;
       text-align: center;
       background-color: white;
       border-bottom: 1px solid #eaeaea;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
     }
-    header h1 {
-      font-size: 2.5rem;
+    
+    .hero-section {
+      padding: 60px 20px 40px;
+      text-align: center;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+    }
+    
+    .hero-section .head {
+      display: inline-flex;
+      align-items: center;
+      margin-bottom: 20px;
+      flex-direction: column;
+      gap: 15px;
+    }
+    
+    .hero-section img {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 4px solid white;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    }
+    
+    .hero-section h1 {
+      font-size: 3rem;
       margin-bottom: 10px;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
     }
-    header p {
-      font-size: 1.1rem;
-      color: var(--secondary-color);
+    
+    .hero-section p {
+      font-size: 1.3rem;
+      opacity: 0.9;
     }
+    
     nav {
-      margin-top: 15px;
+      background-color: white;
     }
+    
     nav button {
       background: none;
       border: none;
-      margin: 0 12px;
+      margin: 0 8px;
       font-weight: 600;
-      font-size: 1rem;
+      font-size: 0.95rem;
       color: var(--primary-color);
       cursor: pointer;
-      padding: 8px 12px;
-      border-radius: 4px;
-      transition: background-color 0.3s ease;
+      padding: 12px 16px;
+      border-radius: 25px;
+      transition: all 0.3s ease;
+      position: relative;
     }
+    
     nav button:hover,
     nav button.active {
       background-color: var(--accent-color);
       color: white;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0, 123, 255, 0.3);
     }
+    
     main {
-      flex-grow: 1;
-      max-width: 700px;
-      margin: 40px auto;
+      max-width: 800px;
+      margin: 0 auto;
       padding: 0 20px;
-      background: white;
-      border-radius: 8px;
-      box-shadow: 0 2px 6px rgb(0 0 0 / 0.1);
-      min-height: 300px;
     }
+    
     section {
-      display: none;
+      padding: 80px 0;
+      min-height: 70vh;
+      background: white;
+      margin: 40px 0;
+      border-radius: 12px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+      padding: 60px 40px;
     }
-    section.active {
-      display: block;
-    }
+    
     section h2 {
-      font-size: 1.8rem;
-      margin-bottom: 15px;
-      border-bottom: 1px solid #ddd;
-      padding-bottom: 5px;
-    }
-    .project {
+      font-size: 2.5rem;
       margin-bottom: 30px;
-    }
-    .project h3 {
-      font-size: 1.2rem;
       color: var(--accent-color);
-      margin-bottom: 5px;
+      text-align: center;
+      position: relative;
     }
-    .project p {
+    
+    section h2::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 80px;
+      height: 3px;
+      background: linear-gradient(90deg, var(--accent-color), #667eea);
+      border-radius: 2px;
+    }
+    
+    #about p {
+      font-size: 1.1rem;
+      text-align: center;
+      max-width: 600px;
+      margin: 0 auto;
       color: var(--secondary-color);
     }
-    ul {
-      padding-left: 20px;
+    
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 30px;
+      margin-top: 40px;
     }
-    ul li {
-      margin-bottom: 8px;
+    
+    .skill-category {
+      background: linear-gradient(135deg, #f8f9ff 0%, #e8f0ff 100%);
+      padding: 25px;
+      border-radius: 10px;
+      border-left: 4px solid var(--accent-color);
+      transition: transform 0.3s ease;
     }
+    
+    .skill-category:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 25px rgba(0, 123, 255, 0.15);
+    }
+    
+    .skill-category h3 {
+      color: var(--accent-color);
+      margin-bottom: 15px;
+      font-size: 1.2rem;
+    }
+    
+    .skill-category p {
+      color: var(--secondary-color);
+      font-size: 1rem;
+    }
+    
+    .project {
+      background: linear-gradient(135deg, #fff 0%, #f8f9ff 100%);
+      padding: 30px;
+      margin-bottom: 30px;
+      border-radius: 12px;
+      border: 1px solid #eaeaea;
+      transition: all 0.3s ease;
+    }
+    
+    .project:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+      border-color: var(--accent-color);
+    }
+    
+    .project h3 {
+      font-size: 1.4rem;
+      color: var(--accent-color);
+      margin-bottom: 15px;
+    }
+    
+    .project p {
+      color: var(--secondary-color);
+      font-size: 1rem;
+      line-height: 1.7;
+    }
+    
+    .contact-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 25px;
+      margin-top: 40px;
+    }
+    
+    .contact-item {
+      text-align: center;
+      padding: 25px;
+      background: linear-gradient(135deg, #f8f9ff 0%, #e8f0ff 100%);
+      border-radius: 10px;
+      transition: transform 0.3s ease;
+    }
+    
+    .contact-item:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 25px rgba(0, 123, 255, 0.15);
+    }
+    
+    .contact-item strong {
+      display: block;
+      color: var(--accent-color);
+      margin-bottom: 10px;
+      font-size: 1.1rem;
+    }
+    
     a {
       color: var(--accent-color);
       text-decoration: none;
+      transition: color 0.3s ease;
     }
+    
     a:hover {
+      color: #0056b3;
       text-decoration: underline;
     }
+    
     footer {
       text-align: center;
-      padding: 20px;
+      padding: 40px 20px;
       font-size: 0.9rem;
-      background-color: white;
-      border-top: 1px solid #eaeaea;
-      color: var(--secondary-color);
-      margin-top: auto;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      margin-top: 40px;
     }
-    .head {
-      display: inline-flex;
-      align-items: center;
-      margin-bottom: 20px;
+    
+    /* Scroll indicator */
+    .scroll-progress {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 0%;
+      height: 3px;
+      background: linear-gradient(90deg, var(--accent-color), #667eea);
+      z-index: 1000;
+      transition: width 0.3s ease;
     }
-    .head img {
-      margin-right: 20px;
+    
+    @media (max-width: 768px) {
+      .hero-section h1 {
+        font-size: 2.2rem;
+      }
+      
+      .hero-section p {
+        font-size: 1.1rem;
+      }
+      
+      nav button {
+        font-size: 0.85rem;
+        padding: 10px 12px;
+        margin: 0 4px;
+      }
+      
+      section {
+        padding: 40px 20px;
+        margin: 20px 0;
+      }
+      
+      section h2 {
+        font-size: 2rem;
+      }
     }
   </style>
 </head>
 <body>
 
-<header>
-<div class="head">
-    <img src="img/CCT_17065.JPG" alt="Profile Picture" style="width: 80px; height: 80px; border-radius: 50%; object-fit: cover; margin-bottom: 10px;" />
-    <h1>Michael Eñoza</h1>
+<div class="scroll-progress"></div>
+
+<div class="hero-section">
+  <div class="head">
+    <img src="img/CCT_17065.JPG" alt="Profile Picture" />
+    <div>
+      <h1>Michael Eñoza</h1>
+      <p>Backend Developer | IT Graduate</p>
+    </div>
+  </div>
 </div>
-  
-  <p>Backend Developer | IT Graduate</p>
+
+<header>
   <nav>
-    <button class="tab-button active" data-target="about">About</button>
-    <button class="tab-button" data-target="skills">Skills</button>
-    <button class="tab-button" data-target="projects">Projects</button>
-    <button class="tab-button" data-target="contact">Contact</button>
+    <button class="nav-button active" data-target="about">About</button>
+    <button class="nav-button" data-target="skills">Skills</button>
+    <button class="nav-button" data-target="projects">Projects</button>
+    <button class="nav-button" data-target="contact">Contact</button>
   </nav>
 </header>
 
 <main>
-  <section id="about" class="active">
+  <section id="about">
     <h2>About</h2>
     <p>I am a detail-oriented IT graduate with a passion for backend development. I enjoy solving complex problems and building efficient, scalable systems. I specialize in Java, Python, and PHP and am continuously expanding my knowledge in backend technologies and system design.</p>
   </section>
 
   <section id="skills">
     <h2>Skills</h2>
-    <ul>
-      <li><strong>Languages:</strong> PHP, Python, JavaScript, Python, Java, Flutter, C#</li>
-      <li><strong>Databases:</strong> MySQL</li>
-      <li><strong>Tools:</strong> Github</li>
-      <li><strong>Systems:</strong>Windows</li>
-    </ul>
+    <div class="skills-grid">
+      <div class="skill-category">
+        <h3>Programming Languages</h3>
+        <p>PHP, Python, JavaScript, Java, Flutter, C#</p>
+      </div>
+      <div class="skill-category">
+        <h3>Database</h3>
+        <p>MySQL</p>
+      </div>
+      <div class="skill-category">
+        <h3>Tools & Platforms</h3>
+        <p>GitHub, Windows</p>
+      </div>
+    </div>
   </section>
 
   <section id="projects">
     <h2>Projects</h2>
     <div class="project">
       <h3>2D Mapping and Management System for Tagaytay Memorial Park</h3>
-      <p>Built a 2D map for tagaytay memorial park using PHP, MySQL, and JavaScript that will locate the specific block where in the searched name of the deceased is located.This system was originally developed to lessen the manual searching from pen and paper and making it into digital adaptation. </p>
+      <p>Built a 2D map for Tagaytay Memorial Park using PHP, MySQL, and JavaScript that will locate the specific block where the searched name of the deceased is located. This system was originally developed to lessen the manual searching from pen and paper and making it into digital adaptation.</p>
     </div>
-  
   </section>
 
   <section id="contact">
     <h2>Contact</h2>
-    <p>Email: <a href="mailto:enozamichael12@gmail.com">enozamichael12@gmail.com</a></p>
-    <p>Facebook: <a href="https://web.facebook.com/Keykil1121">Michael Eñoza</a></p>
-    <p>GitHub: <a href="https://github.com/michael24569" target="_blank" rel="noopener noreferrer">github.com/michael24569</a></p>
+    <div class="contact-grid">
+      <div class="contact-item">
+        <strong>Email</strong>
+        <a href="mailto:enozamichael12@gmail.com">enozamichael12@gmail.com</a>
+      </div>
+      <div class="contact-item">
+        <strong>Facebook</strong>
+        <a href="https://web.facebook.com/Keykil1121" target="_blank">Michael Eñoza</a>
+      </div>
+      <div class="contact-item">
+        <strong>GitHub</strong>
+        <a href="https://github.com/michael24569" target="_blank" rel="noopener noreferrer">github.com/michael24569</a>
+      </div>
+    </div>
   </section>
 </main>
 
@@ -179,23 +366,73 @@
 </footer>
 
 <script>
-  const buttons = document.querySelectorAll('.tab-button');
+  const buttons = document.querySelectorAll('.nav-button');
   const sections = document.querySelectorAll('main section');
+  const scrollProgress = document.querySelector('.scroll-progress');
 
+  // Smooth scroll to sections
   buttons.forEach(button => {
-    button.addEventListener('click', () => {
+    button.addEventListener('click', (e) => {
+      e.preventDefault();
+      
       // Remove active class from all buttons
       buttons.forEach(btn => btn.classList.remove('active'));
       // Add active class to clicked button
       button.classList.add('active');
 
-      // Hide all sections
-      sections.forEach(section => section.classList.remove('active'));
-
-      // Show targeted section
+      // Smooth scroll to target section
       const target = button.getAttribute('data-target');
-      document.getElementById(target).classList.add('active');
+      const targetSection = document.getElementById(target);
+      
+      if (targetSection) {
+        const headerHeight = document.querySelector('header').offsetHeight;
+        const targetPosition = targetSection.getBoundingClientRect().top + window.pageYOffset - headerHeight - 20;
+        
+        window.scrollTo({
+          top: targetPosition,
+          behavior: 'smooth'
+        });
+      }
     });
+  });
+
+  // Update active navigation based on scroll position
+  function updateActiveNav() {
+    const scrollPosition = window.scrollY + 100;
+    
+    sections.forEach((section, index) => {
+      const sectionTop = section.offsetTop;
+      const sectionHeight = section.offsetHeight;
+      const sectionId = section.getAttribute('id');
+      
+      if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
+        buttons.forEach(btn => btn.classList.remove('active'));
+        const activeButton = document.querySelector(`[data-target="${sectionId}"]`);
+        if (activeButton) {
+          activeButton.classList.add('active');
+        }
+      }
+    });
+  }
+
+  // Update scroll progress bar
+  function updateScrollProgress() {
+    const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+    const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+    const scrolled = (scrollTop / scrollHeight) * 100;
+    scrollProgress.style.width = scrolled + '%';
+  }
+
+  // Event listeners for scroll
+  window.addEventListener('scroll', () => {
+    updateActiveNav();
+    updateScrollProgress();
+  });
+
+  // Initialize on page load
+  window.addEventListener('load', () => {
+    updateActiveNav();
+    updateScrollProgress();
   });
 </script>
 
