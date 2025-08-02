@@ -1,4 +1,9 @@
-<!DOCTYPE html>
+section {
+      padding: 60px 40px;
+      background: white;
+      margin: 40px 0;
+      border-radius: 12px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -47,8 +52,9 @@
     }
     
     .hero-section .head {
-      display: inline-flex;
+      display: flex;
       align-items: center;
+      justify-content: center;
       margin-bottom: 20px;
       flex-direction: column;
       gap: 15px;
@@ -107,13 +113,12 @@
     }
     
     section {
-      padding: 80px 0;
-      min-height: 70vh;
+      padding: 60px 40px;
       background: white;
       margin: 40px 0;
       border-radius: 12px;
       box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-      padding: 60px 40px;
+      min-height: 400px;
     }
     
     section h2 {
@@ -279,10 +284,21 @@
       section {
         padding: 40px 20px;
         margin: 20px 0;
+        min-height: 300px;
       }
       
       section h2 {
         font-size: 2rem;
+      }
+      
+      .skills-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+      }
+      
+      .contact-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
       }
     }
   </style>
@@ -386,33 +402,76 @@
       
       if (targetSection) {
         const headerHeight = document.querySelector('header').offsetHeight;
-        const targetPosition = targetSection.getBoundingClientRect().top + window.pageYOffset - headerHeight - 20;
+        const heroHeight = document.querySelector('.hero-section').offsetHeight;
+        let targetPosition;
+        
+        if (target === 'about') {
+          // For about section, account for hero section
+          targetPosition = targetSection.getBoundingClientRect().top + window.pageYOffset - headerHeight - 10;
+        } else {
+          targetPosition = targetSection.getBoundingClientRect().top + window.pageYOffset - headerHeight - 20;
+        }
         
         window.scrollTo({
-          top: targetPosition,
+          top: Math.max(0, targetPosition),
           behavior: 'smooth'
         });
+        
+        // Force update active nav after scroll completes
+        setTimeout(() => {
+          updateActiveNav();
+        }, 800);
       }
     });
   });
 
   // Update active navigation based on scroll position
   function updateActiveNav() {
-    const scrollPosition = window.scrollY + 100;
+    const headerHeight = document.querySelector('header').offsetHeight;
+    const scrollPosition = window.scrollY + headerHeight + 50;
+    const windowHeight = window.innerHeight;
+    const documentHeight = document.documentElement.scrollHeight;
     
-    sections.forEach((section, index) => {
-      const sectionTop = section.offsetTop;
-      const sectionHeight = section.offsetHeight;
+    // Check if we're at the bottom of the page
+    if (window.scrollY + windowHeight >= documentHeight - 10) {
+      buttons.forEach(btn => btn.classList.remove('active'));
+      const lastButton = buttons[buttons.length - 1];
+      if (lastButton) {
+        lastButton.classList.add('active');
+      }
+      return;
+    }
+    
+    let activeSection = null;
+    let closestDistance = Infinity;
+    
+    sections.forEach((section) => {
+      const sectionTop = section.getBoundingClientRect().top + window.pageYOffset;
+      const sectionBottom = sectionTop + section.offsetHeight;
       const sectionId = section.getAttribute('id');
       
-      if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
-        buttons.forEach(btn => btn.classList.remove('active'));
-        const activeButton = document.querySelector(`[data-target="${sectionId}"]`);
-        if (activeButton) {
-          activeButton.classList.add('active');
+      // Check if section is in viewport
+      if (scrollPosition >= sectionTop && scrollPosition < sectionBottom) {
+        activeSection = sectionId;
+      }
+      
+      // Find closest section if none is directly in viewport
+      const distanceFromTop = Math.abs(sectionTop - scrollPosition);
+      if (distanceFromTop < closestDistance && sectionTop <= scrollPosition + 200) {
+        closestDistance = distanceFromTop;
+        if (!activeSection) {
+          activeSection = sectionId;
         }
       }
     });
+    
+    if (activeSection) {
+      buttons.forEach(btn => btn.classList.remove('active'));
+      const activeButton = document.querySelector(`[data-target="${activeSection}"]`);
+      if (activeButton) {
+        activeButton.classList.add('active');
+      }
+    }
   }
 
   // Update scroll progress bar
@@ -424,9 +483,23 @@
   }
 
   // Event listeners for scroll
+  let scrollTimeout;
   window.addEventListener('scroll', () => {
-    updateActiveNav();
-    updateScrollProgress();
+    // Throttle scroll events for better performance
+    if (scrollTimeout) {
+      clearTimeout(scrollTimeout);
+    }
+    scrollTimeout = setTimeout(() => {
+      updateActiveNav();
+      updateScrollProgress();
+    }, 10);
+  });
+
+  // Also listen for resize events (important for mobile)
+  window.addEventListener('resize', () => {
+    setTimeout(() => {
+      updateActiveNav();
+    }, 100);
   });
 
   // Initialize on page load
