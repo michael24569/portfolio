@@ -5,12 +5,25 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Michael Eñoza | Backend Developer</title>
   <style>
+    /* Import modern font */
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+    
     :root {
-      --primary-color: #111;
-      --secondary-color: #444;
-      --accent-color: #007bff;
-      --bg-color: #f9f9f9;
+      --primary-color: #0f172a;
+      --secondary-color: #475569;
+      --accent-color: #3b82f6;
+      --accent-hover: #2563eb;
+      --bg-color: #fafafb;
+      --surface-color: #ffffff;
+      --border-color: #e2e8f0;
+      --text-muted: #64748b;
+      --success-color: #10b981;
+      --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+      --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+      --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+      --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
     }
+
     * {
       margin: 0;
       padding: 0;
@@ -22,159 +35,346 @@
     }
     
     body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
       background-color: var(--bg-color);
       color: var(--primary-color);
-      line-height: 1.6;
+      line-height: 1.7;
+      overflow-x: hidden;
     }
-    
+
+    /* Enhanced scroll animations */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .slide-in-left {
+      opacity: 0;
+      transform: translateX(-50px);
+      transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+
+    .slide-in-left.visible {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    .slide-in-right {
+      opacity: 0;
+      transform: translateX(50px);
+      transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+
+    .slide-in-right.visible {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    /* Enhanced header with glassmorphism */
     header {
       position: sticky;
       top: 0;
       z-index: 100;
-      padding: 20px;
+      padding: 16px 20px;
       text-align: center;
-      background-color: white;
-      border-bottom: 1px solid #eaeaea;
-      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(12px) saturate(180%);
+      border-bottom: 1px solid var(--border-color);
+      box-shadow: var(--shadow-sm);
+      transition: all 0.3s ease;
+    }
+
+    header:hover {
+      box-shadow: var(--shadow-md);
     }
     
+    /* Modern hero section with animated gradient */
     .hero-section {
-      padding: 60px 20px 40px;
+      padding: 80px 20px 60px;
       text-align: center;
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      background: linear-gradient(-45deg, #667eea, #764ba2, #f093fb, #f5576c);
+      background-size: 400% 400%;
+      animation: gradientShift 15s ease infinite;
       color: white;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Floating particles animation */
+    .hero-section::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.1'%3E%3Ccircle cx='9' cy='9' r='1'/%3E%3Ccircle cx='49' cy='49' r='1'/%3E%3Ccircle cx='19' cy='39' r='1'/%3E%3Ccircle cx='39' cy='19' r='1'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+      animation: float 20s linear infinite;
+    }
+
+    @keyframes gradientShift {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    @keyframes float {
+      0% { transform: translateY(0px); }
+      100% { transform: translateY(-100px); }
     }
     
     .hero-section .head {
       display: flex;
       align-items: center;
       justify-content: center;
-      margin-bottom: 20px;
+      margin-bottom: 30px;
       flex-direction: column;
-      gap: 15px;
+      gap: 20px;
+      position: relative;
+      z-index: 1;
     }
     
+    /* Enhanced profile image with hover effects */
     .hero-section img {
-      width: 120px;
-      height: 120px;
+      width: 140px;
+      height: 140px;
       border-radius: 50%;
       object-fit: cover;
-      border: 4px solid white;
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+      border: 4px solid rgba(255, 255, 255, 0.3);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+      transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-section img::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(45deg, transparent 30%, rgba(255, 255, 255, 0.2) 50%, transparent 70%);
+      transform: translateX(-100%);
+      transition: transform 0.8s ease;
+    }
+
+    .hero-section img:hover {
+      transform: scale(1.05) rotate(2deg);
+      border-color: rgba(255, 255, 255, 0.6);
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
+    }
+
+    .hero-section img:hover::before {
+      transform: translateX(100%);
     }
     
     .hero-section h1 {
-      font-size: 3rem;
-      margin-bottom: 10px;
-      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+      font-size: clamp(2.5rem, 5vw, 3.5rem);
+      margin-bottom: 15px;
+      font-weight: 700;
+      text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3);
+      animation: titleGlow 3s ease-in-out infinite alternate;
+    }
+
+    @keyframes titleGlow {
+      from { text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3); }
+      to { text-shadow: 2px 2px 20px rgba(255, 255, 255, 0.3), 2px 2px 8px rgba(0, 0, 0, 0.3); }
     }
     
     .hero-section p {
-      font-size: 1.3rem;
-      opacity: 0.9;
+      font-size: 1.4rem;
+      opacity: 0.95;
+      font-weight: 300;
+      letter-spacing: 0.5px;
     }
     
+    /* Modern navigation with enhanced hover effects */
     nav {
-      background-color: white;
+      background-color: transparent;
+      padding: 0;
     }
     
     nav button {
       background: none;
       border: none;
-      margin: 0 8px;
-      font-weight: 600;
+      margin: 0 6px;
+      font-weight: 500;
       font-size: 0.95rem;
       color: var(--primary-color);
       cursor: pointer;
-      padding: 12px 16px;
-      border-radius: 25px;
-      transition: all 0.3s ease;
+      padding: 12px 20px;
+      border-radius: 50px;
+      transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
       position: relative;
+      overflow: hidden;
+    }
+
+    nav button::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: var(--accent-color);
+      border-radius: 50px;
+      transform: scaleX(0);
+      transform-origin: right;
+      transition: transform 0.3s ease;
+      z-index: -1;
     }
     
+    nav button:hover::before,
+    nav button.active::before {
+      transform: scaleX(1);
+      transform-origin: left;
+    }
+
     nav button:hover,
     nav button.active {
-      background-color: var(--accent-color);
       color: white;
       transform: translateY(-2px);
-      box-shadow: 0 4px 12px rgba(0, 123, 255, 0.3);
+      box-shadow: var(--shadow-lg);
     }
     
     main {
-      max-width: 800px;
+      max-width: 1000px;
       margin: 0 auto;
       padding: 0 20px;
     }
     
+    /* Enhanced sections with modern cards */
     section {
-      padding: 60px 40px;
-      background: white;
-      margin: 40px 0;
-      border-radius: 12px;
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+      padding: 80px 40px;
+      background: var(--surface-color);
+      margin: 60px 0;
+      border-radius: 20px;
+      box-shadow: var(--shadow-md);
       min-height: 400px;
+      position: relative;
+      overflow: hidden;
+      transition: all 0.3s ease;
+    }
+
+    section::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, var(--accent-color), #667eea, var(--accent-color));
+      background-size: 200% 100%;
+      animation: shimmer 3s ease infinite;
+    }
+
+    @keyframes shimmer {
+      0% { background-position: -200% 0; }
+      100% { background-position: 200% 0; }
+    }
+
+    section:hover {
+      box-shadow: var(--shadow-xl);
+      transform: translateY(-4px);
     }
     
     section h2 {
       font-size: 2.5rem;
-      margin-bottom: 30px;
-      color: var(--accent-color);
+      margin-bottom: 40px;
+      color: var(--primary-color);
       text-align: center;
       position: relative;
+      font-weight: 700;
+      letter-spacing: -0.02em;
     }
     
     section h2::after {
       content: '';
       position: absolute;
-      bottom: -10px;
+      bottom: -15px;
       left: 50%;
       transform: translateX(-50%);
       width: 80px;
-      height: 3px;
+      height: 4px;
       background: linear-gradient(90deg, var(--accent-color), #667eea);
       border-radius: 2px;
+      animation: pulse 2s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: translateX(-50%) scaleX(1); }
+      50% { opacity: 0.7; transform: translateX(-50%) scaleX(1.2); }
     }
     
     #about p {
-      font-size: 1.1rem;
+      font-size: 1.2rem;
       text-align: center;
-      max-width: 600px;
+      max-width: 700px;
       margin: 0 auto;
       color: var(--secondary-color);
+      line-height: 1.8;
+      font-weight: 400;
     }
     
+    /* Enhanced skills section */
     .skills-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
       gap: 30px;
-      margin-top: 40px;
+      margin-top: 50px;
     }
     
     .skill-category {
-      background: linear-gradient(135deg, #f8f9ff 0%, #e8f0ff 100%);
-      padding: 25px;
-      border-radius: 10px;
-      border-left: 4px solid var(--accent-color);
-      transition: transform 0.3s ease;
+      background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+      padding: 30px;
+      border-radius: 16px;
+      border: 1px solid var(--border-color);
+      transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .skill-category::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(59, 130, 246, 0.1), transparent);
+      transition: left 0.8s ease;
     }
     
     .skill-category:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 8px 25px rgba(0, 123, 255, 0.15);
+      transform: translateY(-8px) scale(1.02);
+      box-shadow: var(--shadow-xl);
+      border-color: var(--accent-color);
+    }
+
+    .skill-category:hover::before {
+      left: 100%;
     }
     
     .skill-category h3 {
-      color: var(--accent-color);
-      margin-bottom: 20px;
-      font-size: 1.2rem;
+      color: var(--primary-color);
+      margin-bottom: 25px;
+      font-size: 1.3rem;
       text-align: center;
+      font-weight: 600;
+      position: relative;
     }
     
     .skills-icons {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
-      gap: 20px;
+      grid-template-columns: repeat(auto-fit, minmax(90px, 1fr));
+      gap: 25px;
       justify-items: center;
     }
     
@@ -183,96 +383,459 @@
       flex-direction: column;
       align-items: center;
       text-align: center;
-      transition: transform 0.3s ease;
+      transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      cursor: pointer;
+      padding: 15px;
+      border-radius: 12px;
+      position: relative;
     }
     
     .skill-item:hover {
-      transform: scale(1.05);
+      transform: translateY(-8px) scale(1.1);
+      background: rgba(59, 130, 246, 0.1);
     }
     
     .skill-icon {
-      width: 60px;
-      height: 60px;
-      margin-bottom: 8px;
-      transition: transform 0.3s ease;
+      width: 64px;
+      height: 64px;
+      margin-bottom: 12px;
+      transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.1));
     }
     
     .skill-item:hover .skill-icon {
-      transform: scale(1.1);
+      transform: rotateY(360deg) scale(1.1);
+      filter: drop-shadow(0 8px 16px rgba(59, 130, 246, 0.3));
     }
     
     .skill-name {
-      font-size: 0.9rem;
+      font-size: 0.95rem;
       color: var(--secondary-color);
       font-weight: 500;
+      transition: color 0.3s ease;
+    }
+
+    .skill-item:hover .skill-name {
+      color: var(--accent-color);
+      font-weight: 600;
     }
     
+    /* Enhanced project section with modal popup */
     .project {
-      background: linear-gradient(135deg, #fff 0%, #f8f9ff 100%);
-      padding: 30px;
+      background: linear-gradient(135deg, var(--surface-color) 0%, #f8fafc 100%);
+      padding: 35px;
       margin-bottom: 30px;
-      border-radius: 12px;
-      border: 1px solid #eaeaea;
-      transition: all 0.3s ease;
+      border-radius: 16px;
+      border: 1px solid var(--border-color);
+      transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .project::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(135deg, rgba(59, 130, 246, 0.05) 0%, rgba(16, 185, 129, 0.05) 100%);
+      opacity: 0;
+      transition: opacity 0.3s ease;
     }
     
     .project:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+      transform: translateY(-6px) scale(1.02);
+      box-shadow: var(--shadow-xl);
       border-color: var(--accent-color);
+    }
+
+    .project:hover::before {
+      opacity: 1;
     }
     
     .project h3 {
-      font-size: 1.4rem;
-      color: var(--accent-color);
-      margin-bottom: 15px;
+      font-size: 1.5rem;
+      color: var(--primary-color);
+      margin-bottom: 18px;
+      font-weight: 600;
+      position: relative;
+      z-index: 1;
     }
     
     .project p {
       color: var(--secondary-color);
-      font-size: 1rem;
+      font-size: 1.05rem;
       line-height: 1.7;
+      position: relative;
+      z-index: 1;
     }
-    
-    .contact-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 25px;
-      margin-top: 40px;
+
+    /* Modal popup for project details and email contact */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1000;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.7);
+      backdrop-filter: blur(8px);
+      opacity: 0;
+      transition: opacity 0.3s ease;
     }
-    
-    .contact-item {
+
+    .modal.show {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 1;
+    }
+
+    .modal-content {
+      background: var(--surface-color);
+      margin: 20px;
+      padding: 45px;
+      border-radius: 20px;
+      box-shadow: var(--shadow-xl);
+      max-width: 600px;
+      width: calc(100% - 40px);
+      max-height: 80vh;
+      overflow-y: auto;
+      position: relative;
+      transform: translateY(50px);
+      transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+
+    .modal.show .modal-content {
+      transform: translateY(0);
+    }
+
+    /* Email Modal Specific Styles */
+    .email-modal-content {
+      max-width: 580px;
+      max-height: 90vh;
+      padding: 40px;
+      width: calc(100% - 40px);
+    }
+
+    .email-modal-header {
       text-align: center;
-      padding: 25px 5px 40px 5px;
-      background: linear-gradient(135deg, #f8f9ff 0%, #e8f0ff 100%);
+      margin-bottom: 35px;
+      padding: 0 5px;
+    }
+
+    .email-modal-header h3 {
+      color: var(--primary-color);
+      font-size: 1.8rem;
+      margin-bottom: 12px;
+      font-weight: 600;
+      line-height: 1.2;
+    }
+
+    .email-modal-header p {
+      color: var(--secondary-color);
+      font-size: 1rem;
+      line-height: 1.6;
+      max-width: 480px;
+      margin: 0 auto;
+    }
+
+    /* Email Form Styles */
+    .email-form {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+      padding: 0 2px;
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .form-group label {
+      font-weight: 500;
+      color: var(--primary-color);
+      font-size: 0.95rem;
+      margin-bottom: 2px;
+    }
+
+    .form-group input,
+    .form-group textarea {
+      padding: 14px 18px;
+      border: 2px solid var(--border-color);
+      border-radius: 12px;
+      font-size: 1rem;
+      font-family: inherit;
+      background: var(--surface-color);
+      color: var(--primary-color);
+      transition: all 0.3s ease;
+      resize: vertical;
+      width: 100%;
+      box-sizing: border-box;
+    }
+
+    .form-group input:focus,
+    .form-group textarea:focus {
+      outline: none;
+      border-color: var(--accent-color);
+      box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+      transform: translateY(-1px);
+    }
+
+    .form-group input::placeholder,
+    .form-group textarea::placeholder {
+      color: var(--text-muted);
+      opacity: 0.8;
+    }
+
+    /* Animated Send Button */
+    .send-button {
+      background: linear-gradient(135deg, var(--accent-color), var(--accent-hover));
+      color: white;
+      border: none;
+      padding: 16px 28px;
+      border-radius: 12px;
+      font-size: 1.05rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      position: relative;
+      overflow: hidden;
+      margin-top: 8px;
+      min-height: 54px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      box-sizing: border-box;
+    }
+
+    .send-button:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-lg);
+    }
+
+    .send-button:active {
+      transform: translateY(0);
+    }
+
+    .send-button:disabled {
+      opacity: 0.7;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    /* Button Loading Spinner */
+    .spinner {
+      width: 16px;
+      height: 16px;
+      border: 2px solid rgba(255, 255, 255, 0.3);
+      border-top: 2px solid white;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+      margin-right: 8px;
+    }
+
+    .button-loading {
+      display: flex;
+      align-items: center;
+    }
+
+    /* Success/Error Messages */
+    .form-message {
+      padding: 14px 20px;
       border-radius: 10px;
-      transition: transform 0.3s ease;
-      display: block;
-      text-decoration: none;
-      color: inherit;
+      font-size: 0.95rem;
+      font-weight: 500;
+      margin-bottom: 20px;
+      text-align: center;
+      transition: all 0.3s ease;
+      margin-left: 2px;
+      margin-right: 2px;
     }
-    
-    .contact-item:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 8px 25px rgba(0, 123, 255, 0.15);
-      text-decoration: none;
-      color: inherit;
+
+    .form-message.success {
+      background: rgba(16, 185, 129, 0.1);
+      color: var(--success-color);
+      border: 1px solid rgba(16, 185, 129, 0.2);
     }
-    
-    .contact-icon {
-      width: 48px;
-      height: 48px;
-      margin: 0 auto 15px;
-      color: var(--accent-color);
+
+    .form-message.error {
+      background: rgba(239, 68, 68, 0.1);
+      color: #ef4444;
+      border: 1px solid rgba(239, 68, 68, 0.2);
+    }
+
+    /* Close button positioning */
+    .close {
+      position: absolute;
+      right: 20px;
+      top: 20px;
+      font-size: 28px;
+      font-weight: bold;
+      color: var(--text-muted);
+      cursor: pointer;
+      transition: all 0.3s ease;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 10;
+    }
+
+    .close:hover {
+      color: var(--primary-color);
+      background: var(--border-color);
+      transform: rotate(90deg);
+    }
+
+    .close {
+      position: absolute;
+      right: 20px;
+      top: 20px;
+      font-size: 28px;
+      font-weight: bold;
+      color: var(--text-muted);
+      cursor: pointer;
+      transition: all 0.3s ease;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
     }
+
+    .close:hover {
+      color: var(--primary-color);
+      background: var(--border-color);
+      transform: rotate(90deg);
+    }
+
+    .modal h3 {
+      color: var(--primary-color);
+      margin-bottom: 20px;
+      font-size: 1.8rem;
+      font-weight: 600;
+    }
+
+    .modal p {
+      color: var(--secondary-color);
+      line-height: 1.7;
+      margin-bottom: 20px;
+    }
+
+    .modal-features {
+      list-style: none;
+      padding: 0;
+    }
+
+    .modal-features li {
+      padding: 8px 0;
+      padding-left: 25px;
+      position: relative;
+      color: var(--secondary-color);
+    }
+
+    .modal-features li::before {
+      content: '✓';
+      position: absolute;
+      left: 0;
+      color: var(--success-color);
+      font-weight: bold;
+    }
+    
+    /* Enhanced contact section */
+    .contact-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 25px;
+      margin-top: 50px;
+    }
+    
+    .contact-item {
+      text-align: center;
+      padding: 30px 20px 35px;
+      background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+      border-radius: 16px;
+      transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      display: block;
+      text-decoration: none;
+      color: inherit;
+      border: 1px solid var(--border-color);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .contact-item::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(59, 130, 246, 0.1), transparent);
+      transition: left 0.8s ease;
+    }
+    
+    .contact-item:hover {
+      transform: translateY(-8px) scale(1.05);
+      box-shadow: var(--shadow-xl);
+      text-decoration: none;
+      color: inherit;
+      border-color: var(--accent-color);
+    }
+
+    .contact-item:hover::before {
+      left: 100%;
+    }
+    
+    .contact-icon {
+      width: 56px;
+      height: 56px;
+      margin: 0 auto 20px;
+      color: var(--accent-color);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(59, 130, 246, 0.1);
+      border-radius: 50%;
+      transition: all 0.3s ease;
+    }
+
+    .contact-item:hover .contact-icon {
+      transform: rotateY(360deg) scale(1.1);
+      background: var(--accent-color);
+      color: white;
+    }
     
     .contact-icon svg {
-      width: 48px;
-      height: 48px;
+      width: 28px;
+      height: 28px;
       fill: currentColor;
+    }
+
+    .contact-item span {
+      font-weight: 500;
+      color: var(--secondary-color);
+      transition: color 0.3s ease;
+    }
+
+    .contact-item:hover span {
+      color: var(--accent-color);
     }
     
     a {
@@ -282,86 +845,297 @@
     }
     
     a:hover {
-      color: #0056b3;
-      text-decoration: underline;
+      color: var(--accent-hover);
     }
     
+    /* Enhanced footer */
     footer {
       text-align: center;
-      padding: 40px 20px;
-      font-size: 0.9rem;
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      padding: 50px 20px;
+      font-size: 0.95rem;
+      background: linear-gradient(-45deg, #667eea, #764ba2, #f093fb, #f5576c);
+      background-size: 400% 400%;
+      animation: gradientShift 15s ease infinite;
       color: white;
-      margin-top: 40px;
+      margin-top: 60px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    footer::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Ccircle cx='9' cy='9' r='1'/%3E%3Ccircle cx='49' cy='49' r='1'/%3E%3Ccircle cx='19' cy='39' r='1'/%3E%3Ccircle cx='39' cy='19' r='1'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    }
+
+    footer p {
+      position: relative;
+      z-index: 1;
+      font-weight: 300;
     }
     
-    /* Scroll indicator */
+    /* Enhanced scroll progress bar */
     .scroll-progress {
       position: fixed;
       top: 0;
       left: 0;
       width: 0%;
-      height: 3px;
-      background: linear-gradient(90deg, var(--accent-color), #667eea);
+      height: 4px;
+      background: linear-gradient(90deg, var(--accent-color), #667eea, var(--success-color));
       z-index: 1000;
       transition: width 0.3s ease;
+      box-shadow: 0 2px 4px rgba(59, 130, 246, 0.3);
+    }
+
+    /* Loading animation */
+    .loading-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: var(--surface-color);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+      opacity: 1;
+      transition: opacity 0.5s ease;
+    }
+
+    .loading-overlay.hidden {
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .loader {
+      width: 50px;
+      height: 50px;
+      border: 3px solid var(--border-color);
+      border-top: 3px solid var(--accent-color);
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
     }
     
+    /* Responsive design */
     @media (max-width: 768px) {
+      .hero-section {
+        padding: 60px 20px 40px;
+      }
+      
       .hero-section h1 {
-        font-size: 2.2rem;
+        font-size: 2.5rem;
       }
       
       .hero-section p {
-        font-size: 1.1rem;
+        font-size: 1.2rem;
+      }
+      
+      .hero-section img {
+        width: 120px;
+        height: 120px;
       }
       
       nav button {
         font-size: 0.85rem;
-        padding: 10px 12px;
-        margin: 0 4px;
+        padding: 10px 16px;
+        margin: 0 3px;
       }
       
       section {
-        padding: 40px 20px;
-        margin: 20px 0;
-        min-height: 300px;
+        padding: 40px 25px;
+        margin: 30px 0;
+        border-radius: 16px;
       }
       
       section h2 {
-        font-size: 2rem;
+        font-size: 2.2rem;
+        margin-bottom: 30px;
       }
       
       .skills-grid {
         grid-template-columns: 1fr;
-        gap: 20px;
+        gap: 25px;
       }
       
       .skills-icons {
-        grid-template-columns: repeat(auto-fit, minmax(70px, 1fr));
-        gap: 15px;
+        grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+        gap: 20px;
       }
       
       .skill-icon {
-        width: 50px;
-        height: 50px;
+        width: 56px;
+        height: 56px;
       }
       
       .contact-grid {
         grid-template-columns: 1fr;
         gap: 20px;
       }
+
+      .modal-content {
+        margin: 15px;
+        padding: 35px 25px;
+      }
+
+      /* Email Modal Mobile Styles */
+      .email-modal-content {
+        margin: 15px;
+        padding: 35px 25px;
+        max-height: 85vh;
+        width: calc(100% - 30px);
+      }
+
+      .form-row {
+        grid-template-columns: 1fr;
+        gap: 20px;
+      }
+
+      .email-modal-header {
+        margin-bottom: 30px;
+        padding: 0;
+      }
+
+      .email-modal-header h3 {
+        font-size: 1.6rem;
+        margin-bottom: 10px;
+      }
+
+      .email-modal-header p {
+        font-size: 0.95rem;
+        padding: 0 10px;
+      }
+
+      .email-form {
+        gap: 22px;
+        padding: 0;
+      }
+
+      .form-group input,
+      .form-group textarea {
+        padding: 15px 18px;
+        font-size: 16px; /* Prevents zoom on iOS */
+      }
+
+      .send-button {
+        padding: 16px 28px;
+        font-size: 1.05rem;
+      }
+
+      .form-message {
+        margin-left: 0;
+        margin-right: 0;
+        padding: 12px 18px;
+        font-size: 0.9rem;
+      }
+
+      .close {
+        right: 15px;
+        top: 15px;
+        width: 36px;
+        height: 36px;
+        font-size: 24px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      main {
+        padding: 0 15px;
+      }
+
+      section {
+        padding: 30px 20px;
+      }
+
+      .hero-section h1 {
+        font-size: 2.2rem;
+      }
+
+      .hero-section p {
+        font-size: 1.1rem;
+      }
+
+      #about p {
+        font-size: 1.1rem;
+      }
+
+      /* Smaller screens email modal adjustments */
+      .email-modal-content {
+        margin: 10px;
+        padding: 30px 20px;
+        border-radius: 16px;
+        width: calc(100% - 20px);
+      }
+
+      .email-modal-header {
+        margin-bottom: 25px;
+        padding: 0;
+      }
+
+      .email-modal-header h3 {
+        font-size: 1.5rem;
+        margin-bottom: 8px;
+      }
+
+      .email-modal-header p {
+        font-size: 0.9rem;
+        padding: 0 5px;
+      }
+
+      .email-form {
+        gap: 20px;
+        padding: 0;
+      }
+
+      .form-group input,
+      .form-group textarea {
+        padding: 14px 16px;
+      }
+
+      .send-button {
+        padding: 15px 24px;
+        font-size: 1rem;
+      }
+
+      .form-message {
+        margin-left: 0;
+        margin-right: 0;
+        padding: 12px 16px;
+        font-size: 0.85rem;
+      }
+
+      .close {
+        right: 12px;
+        top: 12px;
+        width: 32px;
+        height: 32px;
+        font-size: 22px;
+      }
     }
   </style>
 </head>
 <body>
 
-<div class="scroll-progress"></div>
+<!-- Loading overlay -->
+<div class="loading-overlay" id="loadingOverlay">
+  <div class="loader"></div>
+</div>
+
+<div class="scroll-progress" id="scrollProgress"></div>
 
 <div class="hero-section">
   <div class="head">
-    <img src="img/CCT_17065.JPG" alt="Profile Picture" />
-    <div>
+    <img src="img/CCT_17065.JPG" alt="Profile Picture" class="fade-in" />
+    <div class="fade-in">
       <h1>Michael Eñoza</h1>
       <p>Backend Developer | IT Graduate</p>
     </div>
@@ -378,12 +1152,12 @@
 </header>
 
 <main>
-  <section id="about">
+  <section id="about" class="fade-in">
     <h2>About Me</h2>
     <p>Hello, I'm Michael Enoza, an aspiring backend developer with a foundational knowledge in MySQL, PHP, and JavaScript. I am passionate about building efficient, secure, and scalable server-side web applications. As a recent IT graduate, I am eager to apply my skills in real-world projects and to continue learning in a collaborative environment. I use Git and GitHub to manage my code, track changes, and collaborate effectively. Currently, I am seeking opportunities to contribute to a team and grow as a web developer.</p>
   </section>
 
-  <section id="skills">
+  <section id="skills" class="slide-in-left">
     <h2>Skills</h2>
     <div class="skills-grid">
       <div class="skill-category">
@@ -450,25 +1224,25 @@
     </div>
   </section>
 
-  <section id="projects">
+  <section id="projects" class="slide-in-right">
     <h2>Projects</h2>
-    <div class="project">
+    <div class="project" onclick="openModal('project1')">
       <h3>2D Mapping and Management System for Tagaytay Memorial Park</h3>
       <p>Built a 2D map for Tagaytay Memorial Park using PHP, MySQL, and JavaScript that will locate the specific block where the searched name of the deceased is located. This system was originally developed to lessen the manual searching from pen and paper and making it into digital adaptation.</p>
     </div>
   </section>
 
-  <section id="contact">
+  <section id="contact" class="fade-in">
     <h2>Contact</h2>
     <div class="contact-grid">
-      <a href="mailto:enozamichael12@gmail.com" class="contact-item">
+      <div class="contact-item" onclick="openEmailModal()">
         <div class="contact-icon">
           <svg viewBox="0 0 24 24">
             <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
           </svg>
         </div>
         <span>enozamichael12@gmail.com</span>
-      </a>
+      </div>
       <a href="https://web.facebook.com/Keykil1121" target="_blank" class="contact-item">
         <div class="contact-icon">
           <svg viewBox="0 0 24 24">
@@ -489,24 +1263,127 @@
   </section>
 </main>
 
+<!-- Project Modal -->
+<div id="projectModal" class="modal">
+  <div class="modal-content">
+    <span class="close" onclick="closeModal()">&times;</span>
+    <div id="modalBody">
+      <!-- Content will be inserted here by JavaScript -->
+    </div>
+  </div>
+</div>
+
+<!-- Email Contact Modal -->
+<div id="emailModal" class="modal email-modal">
+  <div class="modal-content email-modal-content">
+    <span class="close" onclick="closeEmailModal()">&times;</span>
+    <div class="email-modal-header">
+      <h3>Get In Touch</h3>
+      <p>I'd love to hear from you. Send me a message and I'll respond as soon as possible.</p>
+    </div>
+    
+    <form id="contactForm" class="email-form">
+      <div class="form-row">
+        <div class="form-group">
+          <label for="senderName">Your Name</label>
+          <input type="text" id="senderName" name="senderName" required placeholder="Enter your full name">
+        </div>
+        <div class="form-group">
+          <label for="senderEmail">Your Email</label>
+          <input type="email" id="senderEmail" name="senderEmail" required placeholder="Enter your email address">
+        </div>
+      </div>
+      
+      <div class="form-group">
+        <label for="emailSubject">Subject</label>
+        <input type="text" id="emailSubject" name="emailSubject" required placeholder="What's this about?">
+      </div>
+      
+      <div class="form-group">
+        <label for="emailMessage">Message</label>
+        <textarea id="emailMessage" name="emailMessage" required placeholder="Tell me about your project, question, or just say hello..." rows="5"></textarea>
+      </div>
+      
+      <button type="submit" class="send-button">
+        <span class="button-text">Send Message</span>
+        <span class="button-loading" style="display: none;">
+          <div class="spinner"></div>
+          Sending...
+        </span>
+      </button>
+    </form>
+  </div>
+</div>
+
 <footer>
   <p>&copy; 2025 Michael Eñoza. All rights reserved.</p>
 </footer>
 
 <script>
+  // Loading animation
+  window.addEventListener('load', () => {
+    setTimeout(() => {
+      document.getElementById('loadingOverlay').classList.add('hidden');
+      
+      // Initialize scroll animations after loading
+      setTimeout(() => {
+        initScrollAnimations();
+      }, 200);
+    }, 1000);
+  });
+
+  // Scroll animations system
+  function initScrollAnimations() {
+    const animatedElements = document.querySelectorAll('.fade-in, .slide-in-left, .slide-in-right');
+    
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          // Add staggered animation for skill items
+          if (entry.target.classList.contains('skill-category')) {
+            const skillItems = entry.target.querySelectorAll('.skill-item');
+            skillItems.forEach((item, index) => {
+              setTimeout(() => {
+                item.style.animation = `slideInUp 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) ${index * 0.1}s both`;
+              }, 100);
+            });
+          }
+        }
+      });
+    }, {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    });
+
+    animatedElements.forEach((el) => {
+      observer.observe(el);
+    });
+  }
+
+  // Navigation and smooth scrolling
   const buttons = document.querySelectorAll('.nav-button');
   const sections = document.querySelectorAll('main section');
-  const scrollProgress = document.querySelector('.scroll-progress');
+  const scrollProgress = document.getElementById('scrollProgress');
 
-  // Smooth scroll to sections
+  // Enhanced smooth scroll to sections
   buttons.forEach(button => {
     button.addEventListener('click', (e) => {
       e.preventDefault();
       
-      // Remove active class from all buttons
-      buttons.forEach(btn => btn.classList.remove('active'));
-      // Add active class to clicked button
+      // Remove active class from all buttons with smooth transition
+      buttons.forEach(btn => {
+        btn.classList.remove('active');
+        btn.style.transform = 'scale(1)';
+      });
+      
+      // Add active class to clicked button with animation
       button.classList.add('active');
+      button.style.transform = 'scale(1.05)';
+      
+      setTimeout(() => {
+        button.style.transform = 'scale(1)';
+      }, 200);
 
       // Smooth scroll to target section
       const target = button.getAttribute('data-target');
@@ -514,37 +1391,55 @@
       
       if (targetSection) {
         const headerHeight = document.querySelector('header').offsetHeight;
-        const heroHeight = document.querySelector('.hero-section').offsetHeight;
         let targetPosition;
         
         if (target === 'about') {
-          // For about section, account for hero section
           targetPosition = targetSection.getBoundingClientRect().top + window.pageYOffset - headerHeight - 10;
         } else {
           targetPosition = targetSection.getBoundingClientRect().top + window.pageYOffset - headerHeight - 20;
         }
         
-        window.scrollTo({
-          top: Math.max(0, targetPosition),
-          behavior: 'smooth'
-        });
+        // Enhanced smooth scrolling with easing
+        smoothScrollTo(Math.max(0, targetPosition), 1000);
         
-        // Force update active nav after scroll completes
         setTimeout(() => {
           updateActiveNav();
-        }, 800);
+        }, 1100);
       }
     });
   });
 
-  // Update active navigation based on scroll position
+  // Custom smooth scroll function with easing
+  function smoothScrollTo(target, duration) {
+    const start = window.pageYOffset;
+    const distance = target - start;
+    let startTime = null;
+
+    function animation(currentTime) {
+      if (startTime === null) startTime = currentTime;
+      const timeElapsed = currentTime - startTime;
+      const run = easeInOutCubic(timeElapsed, start, distance, duration);
+      window.scrollTo(0, run);
+      if (timeElapsed < duration) requestAnimationFrame(animation);
+    }
+
+    function easeInOutCubic(t, b, c, d) {
+      t /= d / 2;
+      if (t < 1) return c / 2 * t * t * t + b;
+      t -= 2;
+      return c / 2 * (t * t * t + 2) + b;
+    }
+
+    requestAnimationFrame(animation);
+  }
+
+  // Enhanced navigation update with smooth transitions
   function updateActiveNav() {
     const headerHeight = document.querySelector('header').offsetHeight;
     const scrollPosition = window.scrollY + headerHeight + 50;
     const windowHeight = window.innerHeight;
     const documentHeight = document.documentElement.scrollHeight;
     
-    // Check if we're at the bottom of the page
     if (window.scrollY + windowHeight >= documentHeight - 10) {
       buttons.forEach(btn => btn.classList.remove('active'));
       const lastButton = buttons[buttons.length - 1];
@@ -562,12 +1457,10 @@
       const sectionBottom = sectionTop + section.offsetHeight;
       const sectionId = section.getAttribute('id');
       
-      // Check if section is in viewport
       if (scrollPosition >= sectionTop && scrollPosition < sectionBottom) {
         activeSection = sectionId;
       }
       
-      // Find closest section if none is directly in viewport
       const distanceFromTop = Math.abs(sectionTop - scrollPosition);
       if (distanceFromTop < closestDistance && sectionTop <= scrollPosition + 200) {
         closestDistance = distanceFromTop;
@@ -586,38 +1479,357 @@
     }
   }
 
-  // Update scroll progress bar
+  // Enhanced scroll progress with smooth animation
   function updateScrollProgress() {
     const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
     const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
     const scrolled = (scrollTop / scrollHeight) * 100;
-    scrollProgress.style.width = scrolled + '%';
+    
+    scrollProgress.style.width = Math.min(scrolled, 100) + '%';
+    
+    // Add glow effect when near completion
+    if (scrolled > 90) {
+      scrollProgress.style.boxShadow = '0 2px 8px rgba(59, 130, 246, 0.6)';
+    } else {
+      scrollProgress.style.boxShadow = '0 2px 4px rgba(59, 130, 246, 0.3)';
+    }
   }
 
-  // Event listeners for scroll
+  // Project modal functionality
+  const projectData = {
+    project1: {
+      title: "2D Mapping and Management System for Tagaytay Memorial Park",
+      description: "A comprehensive digital mapping solution that transforms traditional paper-based cemetery management into a modern, efficient system.",
+      fullDescription: "This project was developed to address the challenges faced by Tagaytay Memorial Park in managing and locating burial sites. The system provides an interactive 2D map interface that allows staff and visitors to quickly locate specific blocks and burial sites.",
+      features: [
+        "Interactive 2D mapping interface with zoom and pan capabilities",
+        "Advanced search functionality to locate deceased individuals",
+        "Block-based organization system for efficient site management",
+        "Responsive design for both desktop and mobile devices",
+        "Database integration for secure data storage and retrieval",
+        "User-friendly admin panel for data management",
+        "Print-friendly location reports and directions"
+      ],
+      technologies: "PHP, MySQL, JavaScript, HTML5, CSS3",
+      challenges: "Converting traditional pen-and-paper record keeping to a digital format while maintaining data integrity and ensuring ease of use for staff members with varying technical expertise.",
+      impact: "Reduced search time from 15-30 minutes to under 2 minutes, improved visitor experience, and eliminated manual record-keeping errors."
+    }
+  };
+
+  // Project modal functions
+  function openModal(projectId) {
+    const modal = document.getElementById('projectModal');
+    const modalBody = document.getElementById('modalBody');
+    const project = projectData[projectId];
+    
+    if (project) {
+      modalBody.innerHTML = `
+        <h3>${project.title}</h3>
+        <p><strong>Overview:</strong> ${project.description}</p>
+        <p>${project.fullDescription}</p>
+        
+        <h4 style="color: var(--primary-color); margin-top: 25px; margin-bottom: 15px; font-size: 1.2rem;">Key Features:</h4>
+        <ul class="modal-features">
+          ${project.features.map(feature => `<li>${feature}</li>`).join('')}
+        </ul>
+        
+        <p style="margin-top: 20px;"><strong>Technologies Used:</strong> <span style="color: var(--accent-color);">${project.technologies}</span></p>
+        <p><strong>Challenge:</strong> ${project.challenges}</p>
+        <p><strong>Impact:</strong> ${project.impact}</p>
+      `;
+      
+      modal.classList.add('show');
+      document.body.style.overflow = 'hidden'; // Prevent background scrolling
+    }
+  }
+
+  function closeModal() {
+    const modal = document.getElementById('projectModal');
+    modal.classList.remove('show');
+    document.body.style.overflow = 'auto'; // Restore scrolling
+  }
+
+  // Email Modal Functions
+  function openEmailModal() {
+    const modal = document.getElementById('emailModal');
+    modal.classList.add('show');
+    document.body.style.overflow = 'hidden'; // Prevent background scrolling
+    
+    // Focus on the first input field for better UX
+    setTimeout(() => {
+      document.getElementById('senderName').focus();
+    }, 300);
+  }
+
+  function closeEmailModal() {
+    const modal = document.getElementById('emailModal');
+    modal.classList.remove('show');
+    document.body.style.overflow = 'auto'; // Restore scrolling
+    
+    // Clear any error messages
+    const existingMessage = modal.querySelector('.form-message');
+    if (existingMessage) {
+      existingMessage.remove();
+    }
+  }
+
+  // Handle Email Form Submission
+  function handleEmailSubmission(event) {
+    event.preventDefault();
+    
+    // Get form elements
+    const form = event.target;
+    const sendButton = form.querySelector('.send-button');
+    const buttonText = sendButton.querySelector('.button-text');
+    const buttonLoading = sendButton.querySelector('.button-loading');
+    
+    // Get form data
+    const formData = {
+      name: form.senderName.value.trim(),
+      email: form.senderEmail.value.trim(),
+      subject: form.emailSubject.value.trim(),
+      message: form.emailMessage.value.trim()
+    };
+    
+    // Basic validation
+    if (!formData.name || !formData.email || !formData.subject || !formData.message) {
+      showFormMessage('Please fill in all required fields.', 'error');
+      return;
+    }
+    
+    // Email validation
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(formData.email)) {
+      showFormMessage('Please enter a valid email address.', 'error');
+      return;
+    }
+    
+    // Show loading state
+    sendButton.disabled = true;
+    buttonText.style.display = 'none';
+    buttonLoading.style.display = 'flex';
+    
+    // Clear previous messages
+    const existingMessage = form.querySelector('.form-message');
+    if (existingMessage) {
+      existingMessage.remove();
+    }
+    
+    // Simulate email sending (replace with actual email service)
+    setTimeout(() => {
+      // In a real implementation, you would send this data to your email service
+      // For now, we'll simulate success
+      console.log('Email data:', formData);
+      
+      // Show success message
+      showFormMessage('Thank you for your message! I\'ll get back to you soon.', 'success');
+      
+      // Reset form
+      form.reset();
+      
+      // Reset button state
+      sendButton.disabled = false;
+      buttonText.style.display = 'block';
+      buttonLoading.style.display = 'none';
+      
+      // Close modal after a delay
+      setTimeout(() => {
+        closeEmailModal();
+      }, 2000);
+      
+    }, 2000); // Simulate network delay
+  }
+
+  // Show form success/error messages
+  function showFormMessage(message, type) {
+    const form = document.getElementById('contactForm');
+    
+    // Remove existing message
+    const existingMessage = form.querySelector('.form-message');
+    if (existingMessage) {
+      existingMessage.remove();
+    }
+    
+    // Create new message element
+    const messageDiv = document.createElement('div');
+    messageDiv.className = `form-message ${type}`;
+    messageDiv.textContent = message;
+    
+    // Insert message at the beginning of the form
+    form.insertBefore(messageDiv, form.firstChild);
+    
+    // Remove error messages after 5 seconds
+    if (type === 'error') {
+      setTimeout(() => {
+        if (messageDiv.parentNode) {
+          messageDiv.remove();
+        }
+      }, 5000);
+    }
+  }
+
+  // Close modal when clicking outside
+  document.getElementById('projectModal').addEventListener('click', (e) => {
+    if (e.target.id === 'projectModal') {
+      closeModal();
+    }
+  });
+
+  // Close email modal when clicking outside
+  document.getElementById('emailModal').addEventListener('click', (e) => {
+    if (e.target.id === 'emailModal') {
+      closeEmailModal();
+    }
+  });
+
+  // Close modals with Escape key
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      const projectModal = document.getElementById('projectModal');
+      const emailModal = document.getElementById('emailModal');
+      
+      if (projectModal.classList.contains('show')) {
+        closeModal();
+      }
+      if (emailModal.classList.contains('show')) {
+        closeEmailModal();
+      }
+    }
+  });
+
+  // Attach form submission handler
+  document.getElementById('contactForm').addEventListener('submit', handleEmailSubmission);
+
+  // Optimized scroll event handling
   let scrollTimeout;
+  let isScrolling = false;
+
   window.addEventListener('scroll', () => {
-    // Throttle scroll events for better performance
+    if (!isScrolling) {
+      requestAnimationFrame(() => {
+        updateActiveNav();
+        updateScrollProgress();
+        isScrolling = false;
+      });
+      isScrolling = true;
+    }
+
+    // Clear timeout for throttling
     if (scrollTimeout) {
       clearTimeout(scrollTimeout);
     }
+    
     scrollTimeout = setTimeout(() => {
-      updateActiveNav();
-      updateScrollProgress();
-    }, 10);
-  });
-
-  // Also listen for resize events (important for mobile)
-  window.addEventListener('resize', () => {
-    setTimeout(() => {
       updateActiveNav();
     }, 100);
   });
 
-  // Initialize on page load
-  window.addEventListener('load', () => {
+  // Enhanced resize handling
+  window.addEventListener('resize', () => {
+    setTimeout(() => {
+      updateActiveNav();
+      updateScrollProgress();
+    }, 100);
+  });
+
+  // Parallax effect for hero section (subtle)
+  window.addEventListener('scroll', () => {
+    const scrolled = window.pageYOffset;
+    const heroSection = document.querySelector('.hero-section');
+    const rate = scrolled * -0.3;
+    
+    if (heroSection) {
+      heroSection.style.transform = `translateY(${rate}px)`;
+    }
+  });
+
+  // Enhanced skill item interactions
+  document.querySelectorAll('.skill-item').forEach(item => {
+    item.addEventListener('mouseenter', () => {
+      const icon = item.querySelector('.skill-icon');
+      const name = item.querySelector('.skill-name');
+      
+      // Add ripple effect
+      item.style.position = 'relative';
+      item.style.overflow = 'hidden';
+      
+      const ripple = document.createElement('div');
+      ripple.style.position = 'absolute';
+      ripple.style.borderRadius = '50%';
+      ripple.style.background = 'rgba(59, 130, 246, 0.3)';
+      ripple.style.transform = 'scale(0)';
+      ripple.style.animation = 'ripple 0.6s linear';
+      ripple.style.left = '50%';
+      ripple.style.top = '50%';
+      ripple.style.width = '100px';
+      ripple.style.height = '100px';
+      ripple.style.marginLeft = '-50px';
+      ripple.style.marginTop = '-50px';
+      
+      item.appendChild(ripple);
+      
+      setTimeout(() => {
+        ripple.remove();
+      }, 600);
+    });
+  });
+
+  // Add ripple animation keyframe
+  const rippleStyle = document.createElement('style');
+  rippleStyle.textContent = `
+    @keyframes ripple {
+      to {
+        transform: scale(2);
+        opacity: 0;
+      }
+    }
+    
+    @keyframes slideInUp {
+      from {
+        transform: translateY(30px);
+        opacity: 0;
+      }
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+  `;
+  document.head.appendChild(rippleStyle);
+
+  // Initialize everything when DOM is ready
+  document.addEventListener('DOMContentLoaded', () => {
     updateActiveNav();
     updateScrollProgress();
+    
+    // Add entrance animations for elements
+    setTimeout(() => {
+      document.querySelectorAll('.hero-section .fade-in').forEach((el, index) => {
+        setTimeout(() => {
+          el.style.animation = `slideInUp 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) both`;
+        }, index * 200);
+      });
+    }, 1200);
+  });
+
+  // Performance optimization: Intersection Observer for skill animations
+  const skillObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const skillItems = entry.target.querySelectorAll('.skill-item');
+        skillItems.forEach((item, index) => {
+          setTimeout(() => {
+            item.style.transform = 'translateY(0)';
+            item.style.opacity = '1';
+          }, index * 100);
+        });
+      }
+    });
+  }, { threshold: 0.5 });
+
+  // Observe skill categories
+  document.querySelectorAll('.skill-category').forEach(category => {
+    skillObserver.observe(category);
   });
 </script>
 
